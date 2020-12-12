@@ -2,9 +2,13 @@ package main
 
 import (
 	"ComTalk/servers/gateway/handlers"
+	"ComTalk/servers/gateway/models/users"
+	"ComTalk/servers/gateway/sessions"
+	"database/sql"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 //The main entrypoint for our server
@@ -74,29 +78,27 @@ func main() {
 
 	//Section Two - Setting Up Database and other Store connections
 
-	/*
-		//Create a new Redis Client
-		rdb := redis.NewClient(&redis.Options{
-			Addr:     redisAddr, // use default Addr
-			Password: "",        // no password set
-			DB:       0,         // use default DB
-		})
-		redisStore := sessions.NewRedisStore(rdb, time.Hour)
+	//Create a new Redis Client
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     redisAddr, // use default Addr
+		Password: "",        // no password set
+		DB:       0,         // use default DB
+	})
+	redisStore := sessions.NewRedisStore(rdb, time.Hour)
 
-		//Open a mysql database
-		db, err := sql.Open("mysql", dsn)
-		if err != nil {
-			log.Fatal(err)
-		}
-		//Initialize my user Store
-		sqlStore := users.NewMySQLStore(db)
+	//Open a mysql database
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//Initialize my user Store
+	sqlStore := users.NewMySQLStore(db)
 
-		hctx := &handlers.HandlerContext{
-			SigningKey:    "my signing key",
-			SessionsStore: redisStore,
-			UserStore:     sqlStore,
-		}
-	*/
+	hctx := &handlers.HandlerContext{
+		SigningKey:    "my signing key",
+		SessionsStore: redisStore,
+		UserStore:     sqlStore,
+	}
 
 	//Section Three - Microservice Gateway Stuff
 
