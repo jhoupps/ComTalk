@@ -2,5 +2,5 @@
 
 GOOS=linux go build
 go build .
-docker build -t jhoupps/gateway .
+docker build -t comtalk/gateway .
 go clean
