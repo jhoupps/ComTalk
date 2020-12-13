@@ -1,3 +1,6 @@
+#keys
+comtalk_aws_instance.pem
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
