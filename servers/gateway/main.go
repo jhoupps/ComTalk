@@ -1,14 +1,11 @@
 package main
 
 import (
-	"ComTalk/servers/gateway/handlers"
-	"ComTalk/servers/gateway/models/users"
-	"ComTalk/servers/gateway/sessions"
-	"database/sql"
 	"log"
 	"net/http"
 	"os"
-	"time"
+
+	"github.com/ComTalk/servers/gateway/handlers"
 )
 
 //The main entrypoint for our server
@@ -43,18 +40,17 @@ func main() {
 
 	//Sessions and Stores Enviroment Variables
 
+	/*//sessionKey: a string to use when signing and validating SessionIDs
+	sessionKey := os.Getenv("SESSIONKEY")
+	if len(sessionKey) == 0 {
+		log.Fatal("Error - could not find sessionKey enviroment variable")
+	}
+	//redisAddr: the address of your redis session store server
+	redisAddr := os.Getenv("REDISADDR")
+	if len(redisAddr) == 0 {
+		log.Fatal("Error - could not find redisAddr enviroment variable")
+	}
 	/*
-		//sessionKey: a string to use when signing and validating SessionIDs
-		sessionKey := os.Getenv("SESSIONKEY")
-		if len(sessionKey) == 0 {
-			log.Fatal("Error - could not find sessionKey enviroment variable")
-		}
-		//redisAddr: the address of your redis session store server
-		redisAddr := os.Getenv("REDISADDR")
-		if len(redisAddr) == 0 {
-			log.Fatal("Error - could not find redisAddr enviroment variable")
-		}
-
 		//dsn: the full data source name to pass as the second parameter to sql.Open()
 		dsn := os.Getenv("DSN")
 		if len(dsn) == 0 {
@@ -77,29 +73,29 @@ func main() {
 	*/
 
 	//Section Two - Setting Up Database and other Store connections
+	/*
+		//Create a new Redis Client
+		rdb := redis.NewClient(&redis.Options{
+			Addr:     redisAddr, // use default Addr
+			Password: "",        // no password set
+			DB:       0,         // use default DB
+		})
+		redisStore := sessions.NewRedisStore(rdb, time.Hour)
 
-	//Create a new Redis Client
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     redisAddr, // use default Addr
-		Password: "",        // no password set
-		DB:       0,         // use default DB
-	})
-	redisStore := sessions.NewRedisStore(rdb, time.Hour)
+		//Open a mysql database
+		db, err := sql.Open("mysql", dsn)
+		if err != nil {
+			log.Fatal(err)
+		}
+		//Initialize my user Store
+		sqlStore := users.NewMySQLStore(db)
 
-	//Open a mysql database
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		log.Fatal(err)
-	}
-	//Initialize my user Store
-	sqlStore := users.NewMySQLStore(db)
-
-	hctx := &handlers.HandlerContext{
-		SigningKey:    "my signing key",
-		SessionsStore: redisStore,
-		UserStore:     sqlStore,
-	}
-
+		hctx := &handlers.HandlerContext{
+			SigningKey:    "my signing key",
+			SessionsStore: redisStore,
+			UserStore:     sqlStore,
+		}
+	*/
 	//Section Three - Microservice Gateway Stuff
 
 	//Microservice handling and routing
