@@ -2,9 +2,11 @@ const getForumHandler = async (req, res, user, { Forum }) => {
     try {
         const forums = await Forum.find();
         res.json(forums);
-        res.setHeader("Content-Type", "application/json")
+        res.setHeader("Content-Type", "application/json");
+        res.end();
     } catch (e) {
-        res.status(500).send("There was an issue getting the forums")
+        res.status(500).send("There was an issue getting the forums");
+        res.end();
     }
 };
 
@@ -12,6 +14,7 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     const { name, description, creator } = req.body
     if (!name) {
         res.status(400).send("Must provide a name for the forum");
+        res.end();
         return;
     }
 
@@ -27,12 +30,14 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     const query = new Forum(forum);
     query.save((err, newForum) => {
         if (err) {
+            console.log(err)
             res.status(500).send('Unable to create forum');
             return;
         }
 
+        res.setHeader("Content-Type", "application/json");
         res.status(201).json(newForum);
-        res.setHeader("Content-Type", "application/json")
+        res.end();
     })
 };
 
@@ -45,6 +50,7 @@ const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
+            res.end();
         } else {
             const messages = await Message
                 .find({forumID: req.params.forumID})
@@ -52,9 +58,11 @@ const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
+            res.end();
         }
     } catch (e) {
         res.status(500).send("There was an issue getting the specified forum")
+        res.end();
     }
 }
 
@@ -79,16 +87,26 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
 
         res.status(201).json(newMessage)
         res.setHeader("Content-Type", "application/json")
+        res.end();
     })
 }
 
 const deleteForumIDHandler = async (req, res, user, { Forum }) => {
-    const forum = await Forum.find();
-    if (forum.creator != user) {
-        res.status(403).send("User is forbidden")
-        return
-    }
+    try {
+        const forumID = req.params.forumID
 
-    forum.delete()
-    res.send("Forum successfully deleted")
+        Forum.findByIdAndDelete(forumID, function(err, updatedForum) {
+            if (err) {
+                res.status(500).send("There was an issue deleting the forum");
+                console.log(err);
+                return;
+            }
+            res.send("Forum successfully deleted");
+        });
+    } catch(e) {
+        console.log(e)
+        res.status(500).send("There was an issue getting forum details");
+    }
 }
+
+module.exports = {getForumHandler, postForumHandler, getForumIDHandler, postForumIDHandler, deleteForumIDHandler}
