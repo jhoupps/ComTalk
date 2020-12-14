@@ -9,6 +9,7 @@ export default {
         sessions: "/v1/Seattle/sessions",
         sessionsMine: "/v1/Seattle/sessions/mine",
         resetPasscode: "/v1/Seattle/resetcodes",
-        passwords: "/v1/Seattle/passwords/"
+        passwords: "/v1/Seattle/passwords/",
+        forum: "/v1/Seattle/forum"
     }
 }
