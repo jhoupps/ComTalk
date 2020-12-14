@@ -97,13 +97,14 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 	_, errUnauth := sessions.GetState(r, hc.SigningKey, hc.SessionsStore, sessionState)
 
 	if errUnauth != nil {
+		log.Printf("unauthenticated error is: " + errUnauth.Error())
 		http.Error(w, "You must be authenticated to use this endpoint", 401)
 		return
 	}
 	//get the user profile, or return status not found
 	resourcePath := r.URL.Path
 	//FLAW - THIS FAILS IF THERE'S SOMETHING AFTER THE USER
-	userID := strings.TrimPrefix(resourcePath, "/v1/users/")
+	userID := strings.TrimPrefix(resourcePath, "/v1/Seattle/users/")
 
 	var intUserID int64
 
@@ -137,12 +138,14 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 			return
 		}
 
-		w.WriteHeader(http.StatusOK)
+		//w.WriteHeader(http.StatusOK)
 
 	} else if r.Method == "PATCH" {
 		//check self status
-		log.Printf("%d", intUserID)
-		log.Printf("%d", sessionState.authenticatedUser.ID)
+		log.Printf("The user id from the url is %d", intUserID)
+		log.Printf("The authenticated user is %d", sessionState.authenticatedUser.ID)
+		log.Printf("The authenticated user name is" + sessionState.authenticatedUser.UserName)
+
 		if sessionState.authenticatedUser.ID != intUserID {
 			http.Error(w, "Error: You may only modify your own user profile", 403)
 			return
@@ -166,6 +169,8 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 		}
 
 		theUserWithUpdate, dbErr := hc.UserStore.Update(intUserID, updateFromRequest)
+		log.Printf("The user with update that I got back is", theUserWithUpdate)
+
 		if dbErr != nil {
 			http.Error(w, dbErr.Error(), 400)
 			return
@@ -182,7 +187,7 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 			return
 		}
 
-		w.WriteHeader(http.StatusOK)
+		//	w.WriteHeader(http.StatusOK)
 
 	} else {
 		http.Error(w, "Error - Only GET or PATCH headers allowed", 405)
@@ -214,6 +219,7 @@ func (hc *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request
 		//Authenticating
 		//Find user profile
 		theUser, cantFindUserErr := hc.UserStore.GetByEmail(credsFromRequest.Email)
+		//	log.Printf("Cant find user err is: " + cantFindUserErr.Error())
 		if cantFindUserErr != nil {
 			//do something that would take the same amount of time as authenticating
 			//This hash value is a random hash from the bcrypt documentation

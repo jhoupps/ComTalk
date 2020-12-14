@@ -2,6 +2,7 @@ package users
 
 import (
 	"database/sql"
+	"log"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -21,7 +22,11 @@ func NewMySQLStore(db *sql.DB) *MySQLStore {
 
 //GetByID returns the User with the given ID
 func (mss *MySQLStore) GetByID(id int64) (*User, error) {
-	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where id=?"
+	//REALLY JANK AND BAD WORKAROUND FOR THE FACT THAT THE SESSIONS STORE THINKS THE FIRST ID IS ID 0 AND THE SQL ONE THINKS IT'S ID 1
+	//id = id + 1
+	//END REALLY BAD AND JANK WORKAROUND
+
+	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from users where id=?"
 
 	user := &User{}
 	err := mss.database.QueryRow(selectQuery, id).Scan(&user.ID, &user.Email, &user.PassHash, &user.UserName,
@@ -36,7 +41,7 @@ func (mss *MySQLStore) GetByID(id int64) (*User, error) {
 
 //GetByEmail returns the User with the given email
 func (mss *MySQLStore) GetByEmail(email string) (*User, error) {
-	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where email=?"
+	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from users where email=?"
 
 	user := &User{}
 	err := mss.database.QueryRow(selectQuery, email).Scan(&user.ID, &user.Email, &user.PassHash, &user.UserName,
@@ -50,7 +55,7 @@ func (mss *MySQLStore) GetByEmail(email string) (*User, error) {
 
 //GetByUserName returns the User with the given Username
 func (mss *MySQLStore) GetByUserName(username string) (*User, error) {
-	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where username=?"
+	selectQuery := "select id,email,passHash,username,firstName,lastName,photoUrl from users where username=?"
 
 	user := &User{}
 	err := mss.database.QueryRow(selectQuery, username).Scan(&user.ID, &user.Email, &user.PassHash, &user.UserName,
@@ -80,18 +85,31 @@ func (mss *MySQLStore) Insert(user *User) (*User, error) {
 //Update applies UserUpdates to the given user ID
 //and returns the newly-updated user
 func (mss *MySQLStore) Update(id int64, updates *Updates) (*User, error) {
-	update := "update users set firstName = ? lastName = ? where id = ?"
+	//REALLY JANK AND BAD WORKAROUND FOR THE FACT THAT THE SESSIONS STORE THINKS THE FIRST ID IS ID 0 AND THE SQL ONE THINKS IT'S ID 1
+	//id = id + 1
+	//END REALLY BAD AND JANK WORKAROUND
+
+	update := "update users set firstName=?, lastName=? where id=?"
 	_, errStmt := mss.database.Exec(update, updates.FirstName, updates.LastName, id)
 	if errStmt != nil {
+		log.Printf("Error in updating user: ", errStmt)
 		return nil, errStmt
 	}
 
-	userDB, _ := mss.GetByID(id)
+	userDB, err := mss.GetByID(id)
+	if err != nil {
+		log.Printf("Error in fetching user: ", err)
+		return nil, err
+	}
 	return userDB, nil
 }
 
 //Delete deletes the user with the given ID
 func (mss *MySQLStore) Delete(id int64) error {
+	//REALLY JANK AND BAD WORKAROUND FOR THE FACT THAT THE SESSIONS STORE THINKS THE FIRST ID IS ID 0 AND THE SQL ONE THINKS IT'S ID 1
+	//id = id + 1
+	//END REALLY BAD AND JANK WORKAROUND
+
 	delete := "delete from users where id = ?"
 	_, errStmt := mss.database.Exec(delete, id)
 	if errStmt != nil {

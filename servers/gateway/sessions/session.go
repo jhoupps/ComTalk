@@ -2,6 +2,7 @@ package sessions
 
 import (
 	"errors"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -46,6 +47,7 @@ func GetSessionID(r *http.Request, signingKey string) (SessionID, error) {
 		return InvalidSessionID, ErrInvalidScheme
 	}
 	sessionID := strings.TrimPrefix(header, schemeBearer)
+	//log.Printf("The processed sessionID i am passing to sessionID is: " + sessionID)
 	validID, err := ValidateID(sessionID, signingKey)
 	if err != nil {
 		return InvalidSessionID, err
@@ -59,10 +61,15 @@ func GetSessionID(r *http.Request, signingKey string) (SessionID, error) {
 func GetState(r *http.Request, signingKey string, store Store, sessionState interface{}) (SessionID, error) {
 	sessionID, err := GetSessionID(r, signingKey)
 	if err != nil {
+		log.Printf("Entered GetState, GetSessionID err is: " + err.Error())
 		return InvalidSessionID, err
 	}
+	log.Printf("Inside Getstate before saving - The authenticated user is %d", sessionState)
 	err = store.Get(sessionID, sessionState)
+	log.Printf("Inside GetState after saving - The authenticated user is %d", sessionState)
+
 	if err != nil {
+		log.Printf("Entered GetState, store.Get err is: " + err.Error())
 		return InvalidSessionID, err
 	}
 	return sessionID, nil
