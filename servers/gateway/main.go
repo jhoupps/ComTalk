@@ -1,10 +1,11 @@
 package main
 
 import (
-	"ComTalk/servers/gateway/handlers"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/ComTalk/servers/gateway/handlers"
 )
 
 //The main entrypoint for our server
@@ -39,18 +40,17 @@ func main() {
 
 	//Sessions and Stores Enviroment Variables
 
+	/*//sessionKey: a string to use when signing and validating SessionIDs
+	sessionKey := os.Getenv("SESSIONKEY")
+	if len(sessionKey) == 0 {
+		log.Fatal("Error - could not find sessionKey enviroment variable")
+	}
+	//redisAddr: the address of your redis session store server
+	redisAddr := os.Getenv("REDISADDR")
+	if len(redisAddr) == 0 {
+		log.Fatal("Error - could not find redisAddr enviroment variable")
+	}
 	/*
-		//sessionKey: a string to use when signing and validating SessionIDs
-		sessionKey := os.Getenv("SESSIONKEY")
-		if len(sessionKey) == 0 {
-			log.Fatal("Error - could not find sessionKey enviroment variable")
-		}
-		//redisAddr: the address of your redis session store server
-		redisAddr := os.Getenv("REDISADDR")
-		if len(redisAddr) == 0 {
-			log.Fatal("Error - could not find redisAddr enviroment variable")
-		}
-
 		//dsn: the full data source name to pass as the second parameter to sql.Open()
 		dsn := os.Getenv("DSN")
 		if len(dsn) == 0 {
@@ -73,7 +73,6 @@ func main() {
 	*/
 
 	//Section Two - Setting Up Database and other Store connections
-
 	/*
 		//Create a new Redis Client
 		rdb := redis.NewClient(&redis.Options{
@@ -97,7 +96,6 @@ func main() {
 			UserStore:     sqlStore,
 		}
 	*/
-
 	//Section Three - Microservice Gateway Stuff
 
 	//Microservice handling and routing

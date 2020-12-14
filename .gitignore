@@ -1,9 +1,13 @@
+#keys
+comtalk_aws_instance.pem
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+*.pem
 
 # Test binary, built with `go test -c`
 *.test

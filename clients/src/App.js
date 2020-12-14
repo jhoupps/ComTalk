@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import DisplayAllPosts from './Components/DisplayAllPosts';
 
-class App extends Component {
-
-    render() {
-
-        return (
-            <div>
-                
-            </div>
-        );
-    }
-}
+const App = ( ) => {
+    return (
+        <div>
+            <DisplayAllPosts />
+        </div>
+    );
+};
 
 export default App;
