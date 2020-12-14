@@ -1,13 +1,14 @@
 export default {
-    base: "https://api.uwinfotutor.me",
+    base: "https://api.comtalk.tech",
     testbase: "https://localhost:4000",
+    //testbase: "https://api.comtalk.tech", //gonna try running with also testing locally on the deployed api
     handlers: {
-        users: "/v1/users",
-        myuser: "/v1/users/me",
-        myuserAvatar: "/v1/users/me/avatar",
-        sessions: "/v1/sessions",
-        sessionsMine: "/v1/sessions/mine",
-        resetPasscode: "/v1/resetcodes",
-        passwords: "/v1/passwords/"
+        users: "/v1/Seattle/users",
+        myuser: "/v1/Seattle/users/me",
+        myuserAvatar: "/v1/Seattle/users/me/avatar",
+        sessions: "/v1/Seattle/sessions",
+        sessionsMine: "/v1/Seattle/sessions/mine",
+        resetPasscode: "/v1/Seattle/resetcodes",
+        passwords: "/v1/Seattle/passwords/"
     }
 }
