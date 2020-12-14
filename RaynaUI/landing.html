@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">  
+	<meta name="description" content="Sign In/Up page for ComTalk.">
+	<meta name="author" content="Rayna Tilley">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>ComTalk</title>
+</head>
+
+<body>
+	<main>
+		<!-- Main Flex Container -->
+		<div>
+			<!-- Page Body -->
+			<div>
+				<!-- Header -->
+				<div>
+					<header>
+						<div>
+							<h1>ComTalk</h1>
+                        </div>
+                        <div>
+                            <label for="sign_out"></label>
+                            <button aria-label="Sign Out">Sign Out</button>
+                        </div>
+					</header>
+				</div>
+
+				<!-- Page Content -->
+				<div id="subscribed_channels">
+                </div>
+					<!-- List all user's subscribed channels. -->
+					<!-- User can delete channels. (Should be X button). -->
+                <div>
+                    <label for="new_forum"></label>
+                    <button aria-label="New Forum">New Forum</button>
+                    <label for="join_forum"></label>
+                    <select id="channel">
+                        <!-- List of all available public channels in db. -->
+                        <!-- TODO -->
+                        <Channel />
+                    </select><br>
+                    <button aria-label="Join Forum">Join Forum</button>
+                </div>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<p>Copyright &copy; 2020</p>
+	</footer>
+
+    <!-- React Scripts -->
+    
+</body>
+</html>
