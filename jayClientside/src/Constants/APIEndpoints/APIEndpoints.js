@@ -10,6 +10,7 @@ export default {
         sessionsMine: "/v1/Seattle/sessions/mine",
         resetPasscode: "/v1/Seattle/resetcodes",
         passwords: "/v1/Seattle/passwords/",
-        forum: "/v1/Seattle/forum"
+        forum: "/v1/Seattle/forum",
+        specificForum: "/v1/Seattle/forum/" //maybe put a :forumID in here
     }
 }
