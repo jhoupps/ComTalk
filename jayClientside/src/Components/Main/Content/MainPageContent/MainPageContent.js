@@ -6,6 +6,7 @@ import api from '../../../../Constants/APIEndpoints/APIEndpoints';
 const MainPageContent = ({ user, setPage }) => {
     const [avatar, setAvatar] = useState(null)
 
+    //JAY INTENDS TO BE WORKING ON THIS FILE
     async function fetchAvatar() {
         const response = await fetch(api.base + api.handlers.myuserAvatar, {
             method: "GET",
@@ -29,6 +30,8 @@ const MainPageContent = ({ user, setPage }) => {
 
     return <>
         <div>Welcome to my application, {user.firstName} {user.lastName}</div>
+
+        <div> "forum html code could go here" </div>
 
 
     </>
