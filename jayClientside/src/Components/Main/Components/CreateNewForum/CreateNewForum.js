@@ -54,10 +54,24 @@ class CreateNewForum extends Component {
         const sendData = { forumName, description };
 
         const response = await fetch(api.base + api.handlers.forum, {
-
-
+            method: "POST",
+            body: JSON.stringify(sendData),
+            headers: new Headers({
+                "Content-Type": "application/json"
+            })
         });
-    
+
+        if (response.status >= 300) {
+            const error = await response.text();
+            this.setError(error);
+            return;
+        }
+        const authToken = response.headers.get("Authorization")
+        localStorage.setItem("Authorization", authToken);
+        this.setError("");
+        this.props.setAuthToken(authToken);
+        const user = await response.json();
+        this.props.setUser(user);
     };
 
 }

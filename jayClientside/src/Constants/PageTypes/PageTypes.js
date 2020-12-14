@@ -4,5 +4,8 @@ export default {
     signedInMain: "SIGNEDIN_MAIN",
     signedInUpdateName: "SIGNEDIN_UPDATENAME",
     signedInUpdateAvatar: "SIGNEDIN_UPDATEAVATAR",
-    forgotPassword: "FORGOT_PASSWORD"
+    forgotPassword: "FORGOT_PASSWORD",
+    //This variable needs to be created in order to use it in the MainPageContent.js for the
+    //New Forum button on the main webpage  
+    createNewForum: "CREATE_NEW_FORUM",
 }
