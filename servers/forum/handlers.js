@@ -1,81 +1,70 @@
-const getForumHandler = async (req, res, user, { Channel }) => {
+const getForumHandler = async (req, res, user, { Forum }) => {
     try {
-        const channels = await Channel.find();
-        res.json(channels);
+        const forums = await Forum.find();
+        res.json(forums);
         res.setHeader("Content-Type", "application/json")
     } catch (e) {
-        res.status(500).send("There was an issue getting the channels")
+        res.status(500).send("There was an issue getting the forums")
     }
 };
 
-const postForumHandler = async (req, res, user, { Channel }) => {
-    const { name, description, private, members, creator } = req.body
+const postForumHandler = async (req, res, user, { Forum }) => {
+    const { name, description, creator } = req.body
     if (!name) {
-        res.status(400).send("Must provide a name for the channel");
+        res.status(400).send("Must provide a name for the forum");
         return;
     }
 
     const createdAt = new Date();
 
-    const channel = { 
+    const forum = { 
         name: name,
         description: description,
-        private: private,
-        members: members,
         createdAt: createdAt,
         creator: creator
     }
     
-    const query = new Channel(channel);
-    query.save((err, newChannel) => {
+    const query = new Forum(forum);
+    query.save((err, newForum) => {
         if (err) {
-            res.status(500).send('Unable to create channel');
+            res.status(500).send('Unable to create forum');
             return;
         }
 
-        res.status(201).json(newChannel);
+        res.status(201).json(newForum);
         res.setHeader("Content-Type", "application/json")
     })
 };
 
-const getForumIDHandler = async (req, res, user, { Channel, Message }) => {
+const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
     try {
-        const channel = await Channel.find()
-        if (channel.private && !channel.members.includes(user)) {
-            res.status(403).send("User is forbidden")
-            return
-        } else if (req.params.id) {
+        if (req.params.id) {
             const messages = await Message
-                .find({channelID: req.params.channelID, id: { $lt: req.params.id }})
+                .find({forumID: req.params.forumID, id: { $lt: req.params.id }})
                 .sort({createdAt: -1})
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
         } else {
             const messages = await Message
-                .find({channelID: req.params.channelID})
+                .find({forumID: req.params.forumID})
                 .sort({createdAt: -1})
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
         }
     } catch (e) {
-        res.status(500).send("There was an issue getting the specified channel")
+        res.status(500).send("There was an issue getting the specified forum")
     }
 }
 
-const postForumIDHandler = async (req, res, user, { Channel, Message }) => {
-    const channel = await Channel.find();
-    if (channel.private && !channel.members.includes(user)) {
-        res.status(403).send("User is forbidden")
-        return
-    }
+const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
     const { body } = req.body
-    const channelID = req.params.channelID
+    const forumID = req.params.forumID
     const createdAt = new Date();
 
     const message = {
-        channelID: channelID,
+        forumID: forumID,
         body: body,
         createdAt: createdAt,
         creator: user
@@ -93,13 +82,13 @@ const postForumIDHandler = async (req, res, user, { Channel, Message }) => {
     })
 }
 
-const deleteForumIDHandler = async (req, res, user, { Channel }) => {
-    const channel = await Channel.find();
-    if (channel.creator != user) {
+const deleteForumIDHandler = async (req, res, user, { Forum }) => {
+    const forum = await Forum.find();
+    if (forum.creator != user) {
         res.status(403).send("User is forbidden")
         return
     }
 
-    channel.delete()
-    res.send("Channel successfully deleted")
+    forum.delete()
+    res.send("Forum successfully deleted")
 }
