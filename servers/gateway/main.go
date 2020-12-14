@@ -18,12 +18,10 @@ func main() {
 	//	the server should listen on. If empty, default to ":80"
 	addr := os.Getenv("ADDR")
 	if len(addr) == 0 {
-		addr = ":80" //TODO - CHANGE TO 443 AFTER I GET HTTPS WORKING
+		addr = ":443" //TODO - CHANGE TO 443 AFTER I GET HTTPS WORKING
 	}
 
 	//HTTPS Enviroment Variables
-	/* //TODO - WORK ON ON SATURDAY
-
 
 	//get the TLS key and cert paths from environment variables
 	//this allows us to use a self-signed cert/key during development
@@ -36,7 +34,6 @@ func main() {
 	if len(tlsKeyPath) == 0 {
 		log.Fatal("Error - could not find tlsCertPath enviroment variable")
 	}
-	*/
 
 	//Sessions and Stores Enviroment Variables
 
@@ -140,6 +137,6 @@ func main() {
 	//Start a web server listening on the address you read from the environment variable, using the mux you created as
 	//	the root handler. Use log.Fatal() to report any errors that occur when trying to start the web server.
 	log.Printf("The server is listening at port" + addr)
-	log.Fatal(http.ListenAndServe /*TLS*/ (addr /*tlsCertPath, tlsKeyPath, corsWrappedMux*/, mux))
+	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath /*corsWrappedMux,*/, mux))
 
 }
