@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 class SignUp extends Component {
+    
     render() {
         return <>
             <Container component="main" maxWidth="xs">
@@ -65,6 +66,19 @@ class SignUp extends Component {
                                     label="Password"
                                     type="password"
                                     id="password"
+                                    //autoComplete="current-password"
+                                />
+                            </Grid>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="passwordConf"
+                                    label="Password Confermation"
+                                    type="passwordConf"
+                                    id="passwordConf"
                                     //autoComplete="current-password"
                                 />
                             </Grid>

@@ -7,6 +7,7 @@ comtalk_aws_instance.pem
 *.dll
 *.so
 *.dylib
+*.pem
 
 # Test binary, built with `go test -c`
 *.test
