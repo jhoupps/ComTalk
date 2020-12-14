@@ -1,11 +1,16 @@
 package main
 
 import (
+	"database/sql"
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/ComTalk/servers/gateway/handlers"
+	"github.com/ComTalk/servers/gateway/models/users"
+	"github.com/ComTalk/servers/gateway/sessions"
+	"github.com/go-redis/redis"
 )
 
 //The main entrypoint for our server
@@ -37,7 +42,7 @@ func main() {
 
 	//Sessions and Stores Enviroment Variables
 
-	/*//sessionKey: a string to use when signing and validating SessionIDs
+	//sessionKey: a string to use when signing and validating SessionIDs
 	sessionKey := os.Getenv("SESSIONKEY")
 	if len(sessionKey) == 0 {
 		log.Fatal("Error - could not find sessionKey enviroment variable")
@@ -47,13 +52,12 @@ func main() {
 	if len(redisAddr) == 0 {
 		log.Fatal("Error - could not find redisAddr enviroment variable")
 	}
-	/*
-		//dsn: the full data source name to pass as the second parameter to sql.Open()
-		dsn := os.Getenv("DSN")
-		if len(dsn) == 0 {
-			log.Fatal("Error - could not find dsn enviroment variable")
-		}
-	*/
+
+	//dsn: the full data source name to pass as the second parameter to sql.Open()
+	dsn := os.Getenv("DSN")
+	if len(dsn) == 0 {
+		log.Fatal("Error - could not find dsn enviroment variable")
+	}
 
 	//Microservice Enviroment Variables
 
@@ -70,29 +74,29 @@ func main() {
 	*/
 
 	//Section Two - Setting Up Database and other Store connections
-	/*
-		//Create a new Redis Client
-		rdb := redis.NewClient(&redis.Options{
-			Addr:     redisAddr, // use default Addr
-			Password: "",        // no password set
-			DB:       0,         // use default DB
-		})
-		redisStore := sessions.NewRedisStore(rdb, time.Hour)
 
-		//Open a mysql database
-		db, err := sql.Open("mysql", dsn)
-		if err != nil {
-			log.Fatal(err)
-		}
-		//Initialize my user Store
-		sqlStore := users.NewMySQLStore(db)
+	//Create a new Redis Client
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     redisAddr, // use default Addr
+		Password: "",        // no password set
+		DB:       0,         // use default DB
+	})
+	redisStore := sessions.NewRedisStore(rdb, time.Hour)
 
-		hctx := &handlers.HandlerContext{
-			SigningKey:    "my signing key",
-			SessionsStore: redisStore,
-			UserStore:     sqlStore,
-		}
-	*/
+	//Open a mysql database
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//Initialize my user Store
+	sqlStore := users.NewMySQLStore(db)
+
+	hctx := &handlers.HandlerContext{
+		SigningKey:    "my signing key",
+		SessionsStore: redisStore,
+		UserStore:     sqlStore,
+	}
+
 	//Section Three - Microservice Gateway Stuff
 
 	//Microservice handling and routing
@@ -125,18 +129,18 @@ func main() {
 	/*mux.Handle("/v1/summary", summaryMicroservice)
 	mux.Handle("/v1/channels", messagingMicroservice)
 	mux.Handle("/v1/channels/", messagingMicroservice)
-	mux.Handle("/v1/messages/", messagingMicroservice)
-	mux.HandleFunc("/v1/users", hctx.UsersHandler)
-	mux.HandleFunc("/v1/users/", hctx.SpecificUserHandler)
-	mux.HandleFunc("/v1/sessions", hctx.SessionsHandler)
-	mux.HandleFunc("/v1/sessions/", hctx.SpecificSessionHandler) */
+	mux.Handle("/v1/messages/", messagingMicroservice) */
+	mux.HandleFunc("/v1/Seattle/users", hctx.UsersHandler)
+	mux.HandleFunc("/v1/Seattle/users/", hctx.SpecificUserHandler)
+	mux.HandleFunc("/v1/Seattle/sessions", hctx.SessionsHandler)
+	mux.HandleFunc("/v1/Seattle/sessions/", hctx.SpecificSessionHandler)
 	mux.HandleFunc("/v1/Seattle/helloWorld", handlers.HelloHandler)
 
-	///corsWrappedMux := handlers.NewCORSMiddleware(mux)
+	corsWrappedMux := handlers.NewCORSMiddleware(mux)
 
 	//Start a web server listening on the address you read from the environment variable, using the mux you created as
 	//	the root handler. Use log.Fatal() to report any errors that occur when trying to start the web server.
 	log.Printf("The server is listening at port" + addr)
-	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath /*corsWrappedMux,*/, mux))
+	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath, corsWrappedMux))
 
 }

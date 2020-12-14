@@ -16,3 +16,4 @@ docker run -d \
 comtalk/gateway
 
 echo "Just missing microservice stuff on the inside_aws script now"
+echo "REMINDER TO JAY - IF THIS FAILS MAKE SURE LF LINE ENDINGS ON WINDOWS MACHINE"
