@@ -13,10 +13,12 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             content = <MainPageContent user={user} setPage={setPage} />;
             break;
         case PageTypes.signedInUpdateName:
-            content = <UpdateName user={user} setUser={setUser} />;
+            //content = <UpdateName user={user} setUser={setUser} />;
+            content = <>If you're seeing this, Jay successfully removed the updateName page</>;
             break;
         case PageTypes.signedInUpdateAvatar:
-            content = <UpdateAvatar user={user} setUser={setUser} />;
+           // content = <UpdateAvatar user={user} setUser={setUser} />;
+            content = <>If you're seeing this, Jay successfully removed the updateAvatar page</>;
             break;
         default:
             content = <>Error, invalid path reached</>;
