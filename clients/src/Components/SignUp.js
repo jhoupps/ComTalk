@@ -69,6 +69,19 @@ class SignUp extends Component {
                                     //autoComplete="current-password"
                                 />
                             </Grid>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="passwordConf"
+                                    label="Password Confermation"
+                                    type="passwordConf"
+                                    id="passwordConf"
+                                    //autoComplete="current-password"
+                                />
+                            </Grid>
                         </Grid>
                         <Button
                             type="submit"
