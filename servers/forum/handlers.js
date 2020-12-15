@@ -4,15 +4,14 @@ const getForumHandler = async (req, res, { Forum }) => {
         res.json(forums);
         res.setHeader("Content-Type", "application/json");
     } catch (e) {
-        res.setHeader("Content-Type", "text/plain");
-        res.status(500).send("There was an issue getting the forums");
+        res.status(500);
+        return;
     }
 };
 
 const postForumHandler = async (req, res, { Forum }) => {
     const { name, description, creator } = req.body
     if (!name) {
-        res.setHeader("Content-Type", "text/plain");
         res.status(400).send("Must provide a name for the forum");
         return;
     }
@@ -29,8 +28,8 @@ const postForumHandler = async (req, res, { Forum }) => {
     const query = new Forum(forum);
     query.save((err, newForum) => {
         if (err) {
-            res.setHeader("Content-Type", "text/plain");
-            res.status(500).send('Unable to create forum');
+            console.log(err);
+            res.sendStatus(500);
             return;
         }
 
@@ -57,8 +56,8 @@ const getForumIDHandler = async (req, res, { Forum, Message }) => {
             res.json(messages)
         }
     } catch (e) {
-        res.setHeader("Content-Type", "text/plain");
-        res.status(500).send("There was an issue getting the specified forum")
+        res.status(500);
+        return;
     }
 }
 
@@ -76,8 +75,8 @@ const postForumIDHandler = async (req, res, { Forum, Message }) => {
     const query = new Message(message)
     query.save((err, newMessage) => {
         if (err) {
-            res.setHeader("Content-Type", "text/plain");
-            res.status(500).send('Unable to create message');
+            console.log(err);
+            res.sendStatus(500);
             return;
         }
 
@@ -92,17 +91,16 @@ const deleteForumIDHandler = async (req, res, { Forum }) => {
 
         Forum.findByIdAndDelete(forumID, function(err, updatedForum) {
             if (err) {
-                res.status(500).send("There was an issue deleting the forum");
                 console.log(err);
+                res.sendStatus(500);
                 return;
             }
             res.set("Content-Type", "text/plain")
             res.send("Forum successfully deleted");
         });
     } catch(e) {
-        console.log(e)
-        res.setHeader("Content-Type", "text/plain");
-        res.status(500).send("There was an issue getting forum details");
+        res.status(500);
+        return;
     }
 }
 
