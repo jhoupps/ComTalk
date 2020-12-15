@@ -4,7 +4,7 @@ import './Styles/MainPageContent.css';
 import api from '../../../../Constants/APIEndpoints/APIEndpoints';
 
 const MainPageContent = ({ user, setPage }) => {
-    const [avatar, setForumList] = useState(null)
+    const [name, setForumName] = useState(null)
 
     //JAY INTENDS TO BE WORKING ON THIS FILE
     async function fetchForumList() {
@@ -20,8 +20,17 @@ const MainPageContent = ({ user, setPage }) => {
             return;
         }
         //WANYU - DO THINGS WITH the repsonse
+        console.log("I am in the mainpage content")
         const forumjson = await response.json();
         console.log(forumjson);
+        console.log(forumjson[0]);
+        console.log(forumjson[0].name);
+        const nameVal = forumjson[0].name;
+        console.log("Confirming that Jay's code has changed");
+
+        setForumName(nameVal);
+        //setAvatar
+
     }
 
     useEffect(() => {
@@ -37,7 +46,7 @@ const MainPageContent = ({ user, setPage }) => {
 
 				<div id="subscribed_channels">
                     There will be a list of buttons for each channel here once Jay can call endpoints
-                    <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>View a Forum - broken</button></div>
+                    <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>{name}</button></div>
 
                 </div>
 
