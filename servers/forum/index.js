@@ -12,7 +12,7 @@ const {
    deleteForumIDHandler
 } = require('./handlers')
 
-const mongoEndpoint = "mongodb://mongoContainer:27017/test"
+const mongoEndpoint = "mongodb://mongoContainer:27017/test";
 
 const Forum = mongoose.model("Forum", forumSchema);
 const Message = mongoose.model("Message", messageSchema);

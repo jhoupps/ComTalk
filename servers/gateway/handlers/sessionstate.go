@@ -8,6 +8,6 @@ import (
 
 //SessionState defines a session state struct for this web server
 type SessionState struct {
-	beginTime         time.Time
-	authenticatedUser users.User
+	BeginTime         time.Time
+	AuthenticatedUser users.User
 }
