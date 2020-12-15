@@ -12,6 +12,7 @@ docker run -d \
 -v /etc/letsencrypt:/etc/letsencrypt:ro \
 --env SESSIONKEY="ThisSeemsLikeAsGoodAKeyAsAny" \
 --env REDISADDR="redisServer:6379" \
+--env FORUMADDR="forum" \
 --env DSN="root:ThisIsHorriblyInsecure@tcp(mysqldb:3306)/prod" \
 comtalk/gateway
 
