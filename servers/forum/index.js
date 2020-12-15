@@ -35,12 +35,6 @@ const connect = () => {
 
 const RequestWrapper = (handler, SchemeAndDbForwarder) => {
     return (req, res) => {
-        const user = req.get("X-User")
-        if (!user) {
-            res.status(401).send("User is unauthorized")
-            return;
-        }
-
         handler(req, res, user, SchemeAndDbForwarder);
     }
 }

@@ -94,6 +94,7 @@ const deleteForumIDHandler = async (req, res, user, { Forum }) => {
                 console.log(err);
                 return;
             }
+            res.set("Content-Type", "text/plain")
             res.send("Forum successfully deleted");
         });
     } catch(e) {
