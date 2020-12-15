@@ -13,7 +13,7 @@ function getGithubOrgs(url) {
 }
 
 
-class ViewForumClass extends React.Component {
+class ViewForum extends React.Component {
     constructor(props) {
         (props);
         this.channels = {res: []}
@@ -43,35 +43,43 @@ class ViewForumClass extends React.Component {
     }
     
     // res[0].posts[i]
-    }
+
     render() {
-        return(
+        // HARDCODING RIGHT NOW - Need to fetch tomorrow
+        return (
             <div>
                 <div><h2>{this.res[0].name}</h2></div>
                 <div>
                     <div id="posts">
                         <p>There's some posts here, it's a general forum.</p>
-                        <div id="rendered_messages"> 
-                            {this.state.res[0].posts.map((post) => {
-                                return (
-                                    <div id="post"> 
-                                        <div id="username">
-                                            <p>post.username</p>
-                                        </div>
-                                        <div id="timestamp">
-                                            <p>post.timestamp</p>
-                                        </div>
-                                        <div id="mesage">
-                                            <p>post</p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                        <div id="rendered_messages">
+                            <div id="post"> 
+                                <div id="username">
+                                    <p>John Doe</p>
+                                </div>
+                                <div id="timestamp">
+                                    <p>10/7/2020 5:00 pm</p>
+                                </div>
+                                <div id="mesage">
+                                    <p>Hey! Does anyone want to go on a hike in the PNW?</p>
+                                </div>
+                            </div>
+                            <div id="post"> 
+                                <div id="username">
+                                    <p>Jill Donovan</p>
+                                </div>
+                                <div id="timestamp">
+                                    <p>10/7/2020 7:12 pm</p>
+                                </div>
+                                <div id="mesage">
+                                    <p>Hiya! I am so down! Saturday? PS. Our initials match *Heart*!</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div>
+                <div id="new_message_container">
                     <label for="new_message"></label>
                     <textarea id="new_message"></textarea>
                     <button aria-label="Send">Send</button>
