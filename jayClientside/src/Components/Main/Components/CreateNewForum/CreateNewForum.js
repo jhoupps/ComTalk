@@ -106,7 +106,7 @@ class CreateNewForum extends Component {
                     <span>Description: </span>
                     <input name={"description"} value={description} onChange={this.setField} />
                 </div>
-                <input type="submit" value="Submit" />
+                <input id="submit_button" ype="submit" value="Submit" />
             </form>
             <br />
         </>
