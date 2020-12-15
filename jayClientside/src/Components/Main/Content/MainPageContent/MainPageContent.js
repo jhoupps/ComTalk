@@ -41,7 +41,7 @@ const MainPageContent = ({ user, setPage }) => {
 
                 </div>
 
-                <div><button onClick={(e) => { setPage(e, PageTypes.signedInUpdateName) }}>New Forum</button></div>
+                <div><button onClick={(e) => { setPage(e, PageTypes.createNewForum) }}>New Forum</button></div>
 			</div>
 	</main>
     </>
