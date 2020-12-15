@@ -4,7 +4,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: url("../../../../../Styles/pics/more_evergreen.jpg");
+    background-image: url("../../../../../Styles/pics/more_evergreen.jpg");
 }
 
 #subscribed_channels {
