@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../../Constants/APIEndpoints/APIEndpoints';
 import Errors from '../../../Errors/Errors';
-import PageTypes from '../../../../Constants/PageTypes/PageTypes';
+import PropTypes from 'prop-types';
 
 /**
  * @class
@@ -9,20 +9,24 @@ import PageTypes from '../../../../Constants/PageTypes/PageTypes';
  */
 
 class CreateNewForum extends Component {
+    static propTypes = {
+        setPage: PropTypes.func,
+        setAuthToken: PropTypes.func
+    }
 
     constructor(props) {
         super(props);
 
         this.state= {
-            forumName: '',
+            name: '',
             description: '',
             error: ''
         };
 
         this.fields = [
             {
-                name: "Forum Name",
-                key: "forumName"
+                name: "Name",
+                key: "name"
             },
             {
                 name: "Description",
@@ -50,9 +54,9 @@ class CreateNewForum extends Component {
      */
     submitForum = async (e) => {
         e.preventDefault();
-        const { forumName, description } = this.state;         
+        const { name, description } = this.state;         
     
-        const sendData = { forumName, description };
+        const sendData = { name, description };
 
         const response = await fetch(api.base + api.handlers.forum, {
             method: "POST",
@@ -62,37 +66,49 @@ class CreateNewForum extends Component {
             })
         });
 
-        if (response.status >= 300) {
-            const error = await response.text();
-            this.setError(error);
-            return;
-        }
+       // if (response.status >= 300) {
+       //     const error = await response.text();
+       //     this.setError(error);
+       //     return;
+       // }
         const authToken = response.headers.get("Authorization")
         localStorage.setItem("Authorization", authToken);
-        this.setError("");
-        this.props.setAuthToken(authToken);
+        //this.setError("");
+        //this.props.setAuthToken(authToken);
         const user = await response.json();
         this.props.setUser(user);
     };
 
-    render() {
-        const { forumName, description, error } = this.state;
-        return <>
-            <Errors error={error} setError={this.setError} />
+    //These two lines of comments might be needed for future use inside the render function
+        //<Errors error={error} setError={this.setError} /> 
+        //<button onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
 
-            <div>Enter a new forum</div>
+    render() {
+        const { name, description, error } = this.state;
+        return <>
+            <br />
+            <div>Create a new forum</div>
+            <br />
+
+            <div>
+                Instruction: Please enter the name and description for your new forum, and click on the 
+                <strong> Submit</strong> button to submit your response. Use the <strong>Back to main </strong>
+                button to go back to the main page. Congratulations, you've just successfully created your new forum 
+                 now! 
+            </div>
             <br />
             <form onSubmit={this.submitForum}>
                 <div>
                     <span>Forum Name: </span>
-                    <input name={"forumName"} value={forumName} onChange={this.setField} />
+                    <input name={"name"} value={name} onChange={this.setField} />
                 </div>
                 <div>
                     <span>Description: </span>
                     <input name={"description"} value={description} onChange={this.setField} />
                 </div>
+                <input type="submit" value="Submit" />
             </form>
-            <button onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
+
             <br />
         </>
     }
