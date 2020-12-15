@@ -1,14 +1,21 @@
 {
-  "main.css": "/static/css/main.33d869c3.chunk.css",
-  "main.js": "/static/js/main.232c2fd1.chunk.js",
-  "main.js.map": "/static/js/main.232c2fd1.chunk.js.map",
-  "static/js/1.3a6aafd9.chunk.js": "/static/js/1.3a6aafd9.chunk.js",
-  "static/js/1.3a6aafd9.chunk.js.map": "/static/js/1.3a6aafd9.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/App.css": "/static/media/leaves_background.6b387b05.jpg",
-  "static/css/main.33d869c3.chunk.css.map": "/static/css/main.33d869c3.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.b80f21dfd9dfeb43b282ee68604d6bf9.js": "/precache-manifest.b80f21dfd9dfeb43b282ee68604d6bf9.js",
-  "service-worker.js": "/service-worker.js"
+  "files": {
+    "main.css": "/static/css/main.ad43648a.chunk.css",
+    "main.js": "/static/js/main.b3abb9d9.chunk.js",
+    "main.js.map": "/static/js/main.b3abb9d9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c012fedc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c012fedc.js.map",
+    "static/js/2.a7d25cf3.chunk.js": "/static/js/2.a7d25cf3.chunk.js",
+    "static/js/2.a7d25cf3.chunk.js.map": "/static/js/2.a7d25cf3.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.ad43648a.chunk.css.map": "/static/css/main.ad43648a.chunk.css.map",
+    "static/js/2.a7d25cf3.chunk.js.LICENSE.txt": "/static/js/2.a7d25cf3.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/forest3.43931c8a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c012fedc.js",
+    "static/js/2.a7d25cf3.chunk.js",
+    "static/css/main.ad43648a.chunk.css",
+    "static/js/main.b3abb9d9.chunk.js"
+  ]
 }
