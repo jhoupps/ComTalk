@@ -6,6 +6,7 @@ import UpdateName from './Components/UpdateName/UpdateName';
 import UpdateAvatar from './Components/UpdateAvatar/UpdateAvatar';
 import ViewForum from './Components/ViewForum/ViewForum';
 import createNewForum from './Components/CreateNewForum/CreateNewForum';
+import './Content/MainPageContent/Styles'
 
 const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
     let content = <></>
