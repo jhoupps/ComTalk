@@ -22,7 +22,7 @@ const Message = mongoose.model("Message", messageSchema);
 
 const app = express();
 
-const addr = process.env.FORUMADDR || ":80"
+const addr = process.env.ADDR || ":80"
 const [host, port] = addr.split(":")
 
 app.use(express.json());
