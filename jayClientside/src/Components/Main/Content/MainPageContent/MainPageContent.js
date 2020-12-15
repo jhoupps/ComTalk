@@ -36,8 +36,8 @@ const MainPageContent = ({ user, setPage }) => {
 
 
 				<div id="subscribed_channels">
-                    There will be a list of buttons for each channel here once Jay can call endpoints
-                    <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>View a Forum - broken</button></div>
+                    There will be a list of buttons representing subscribed channels here once Jay can call endpoints
+                    <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>View a Forum (Broken)</button></div>
 
                 </div>
 

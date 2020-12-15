@@ -33,8 +33,8 @@ const ViewForum = ({ user, setPage }) => {
     return <>
         <main>
 			<div>
-                <div><h2>Channel name here</h2> </div>
-				<div>There's some posts here, it's a general forum </div>
+                <div><h2>Channel Name (TODO)</h2> </div>
+				<div id="posts">There's some posts here, it's a general forum.</div>
 			</div>
 	</main>
     </>

@@ -117,8 +117,9 @@ class SignUp extends Component {
                 setField={this.setField}
                 submitForm={this.submitForm}
                 values={values}
-                fields={this.fields} />
-            <button onClick={(e) => this.props.setPage(e, PageTypes.signIn)}>Sign in instead</button>
+                fields={this.fields} 
+            />
+            <button id="submit_button" onClick={(e) => this.props.setPage(e, PageTypes.signIn)}>Sign in instead</button>
         </>
     }
 }

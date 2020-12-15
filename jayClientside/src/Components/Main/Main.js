@@ -44,11 +44,11 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             </header>
         </div>
         {content}
-        {contentPage && <button onClick={(e) => setPage(e, PageTypes.signedInMain)}>Back to main</button>}
+        {contentPage && <button id="back_home" onClick={(e) => setPage(e, PageTypes.signedInMain)}>Back to Main</button>}
         <SignOutButton setUser={setUser} setAuthToken={setAuthToken} />
 
         <footer>
-		<p>Copyright &copy; 2020</p>
+            <p>Andy | Jay | Rayna | Wanyu | Copyright &copy; 2020</p>
 	    </footer>
     </>
 }

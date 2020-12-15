@@ -80,19 +80,19 @@ class CreateNewForum extends Component {
         return <>
             <Errors error={error} setError={this.setError} />
 
-            <div>Enter a new forum</div>
+            <div><h2>Enter a New Forum</h2></div>
             <br />
             <form onSubmit={this.submitForum}>
-                <div>
+                <div id="form_entry">
                     <span>Forum Name: </span>
                     <input name={"forumName"} value={forumName} onChange={this.setField} />
                 </div>
-                <div>
+                <div id="form_entry">
                     <span>Description: </span>
                     <input name={"description"} value={description} onChange={this.setField} />
                 </div>
             </form>
-            <button onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
+            <button id="submit_button" onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
             <br />
         </>
     }
