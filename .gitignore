@@ -1,5 +1,6 @@
 #keys
 comtalk_aws_instance.pem
+*/node_modules/
 
 # Binaries for programs and plugins
 *.exe
