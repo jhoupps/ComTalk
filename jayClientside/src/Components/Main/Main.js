@@ -39,7 +39,7 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             <header>
                 <div><h1>ComTalk</h1> </div>
 
-                <div>Hello, {user.firstName} {user.lastName}</div>
+                <div id="landing_title">Hello, {user.firstName} {user.lastName}</div>
             </header>
         </div>
         {content}
