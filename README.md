@@ -6,8 +6,6 @@ Comtalk application is an open, community forum application for users living in 
 With the ComTalk platform, users will have the ability to create forums discussing various topics where they will be validated by the moderators to ensure appropriateness. They will be able to like/dislike the forums being posted by others, as well as report any forums that might violate the content policies and guidelines. Since ComTalk is currently targeted to people living in the Seattle area (though it would potentially expand to other cities and regions in the US), residents in this region will benefit from using the application where they will be able to create an online community to discuss a wide variety of topics and maintain social wellness while meeting new people online, especially now during the COVID-19 pandemic. As developers, and as residents impacted severely from the pandemic, we have experienced and understood the various mental and physical struggles that people have been going through. We hope to provide a flexible and safe online platform where people can form new and lasting relationships, allowing them to support each other during these difficult times. 
 
 
-TODO!!! UPDATE ARCHETECTURAL DIAGRAM 
-
 ![ComTalk Architectural Diagram](architectural_diagram.png "Current as of 12.14.20") 
 
 Sharing link: https://drive.google.com/file/d/1ABDcMIL3H_FjReHX7tb6yyf56RIsr27w/view?usp=sharing
