@@ -1,6 +1,7 @@
 docker rm -f forum
 docker pull comtalk/forum
 
+docker stop mongoContainer
 docker rm -f mongoContainer
 
 docker run \

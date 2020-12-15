@@ -35,7 +35,8 @@ const connect = () => {
 
 const RequestWrapper = (handler, SchemeAndDbForwarder) => {
     return (req, res) => {
-        handler(req, res, user, SchemeAndDbForwarder);
+
+        handler(req, res, SchemeAndDbForwarder);
     }
 }
 
@@ -55,7 +56,7 @@ mongoose.connection.on('error', console.error)
     .once('open', main);
 
 async function main() {
-    app.listen(port, "", () => {
+    app.listen(port, () => {
         console.log(`server is listening at http://${port}`);
     });
 }

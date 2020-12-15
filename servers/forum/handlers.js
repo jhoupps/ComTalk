@@ -1,16 +1,18 @@
-const getForumHandler = async (req, res, user, { Forum }) => {
+const getForumHandler = async (req, res, { Forum }) => {
     try {
         const forums = await Forum.find();
         res.json(forums);
         res.setHeader("Content-Type", "application/json");
     } catch (e) {
+        res.setHeader("Content-Type", "text/plain");
         res.status(500).send("There was an issue getting the forums");
     }
 };
 
-const postForumHandler = async (req, res, user, { Forum }) => {
+const postForumHandler = async (req, res, { Forum }) => {
     const { name, description, creator } = req.body
     if (!name) {
+        res.setHeader("Content-Type", "text/plain");
         res.status(400).send("Must provide a name for the forum");
         return;
     }
@@ -27,7 +29,7 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     const query = new Forum(forum);
     query.save((err, newForum) => {
         if (err) {
-            console.log(err)
+            res.setHeader("Content-Type", "text/plain");
             res.status(500).send('Unable to create forum');
             return;
         }
@@ -37,7 +39,7 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     })
 };
 
-const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
+const getForumIDHandler = async (req, res, { Forum, Message }) => {
     try {
         if (req.params.id) {
             const messages = await Message
@@ -55,11 +57,12 @@ const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
             res.json(messages)
         }
     } catch (e) {
+        res.setHeader("Content-Type", "text/plain");
         res.status(500).send("There was an issue getting the specified forum")
     }
 }
 
-const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
+const postForumIDHandler = async (req, res, { Forum, Message }) => {
     const { body } = req.body
     const forumID = req.params.forumID
     const createdAt = new Date();
@@ -68,13 +71,12 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
         forumID: forumID,
         body: body,
         createdAt: createdAt,
-        creator: user
     }
 
     const query = new Message(message)
     query.save((err, newMessage) => {
         if (err) {
-            console.log(err)
+            res.setHeader("Content-Type", "text/plain");
             res.status(500).send('Unable to create message');
             return;
         }
@@ -84,7 +86,7 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
     })
 }
 
-const deleteForumIDHandler = async (req, res, user, { Forum }) => {
+const deleteForumIDHandler = async (req, res, { Forum }) => {
     try {
         const forumID = req.params.forumID
 
@@ -99,6 +101,7 @@ const deleteForumIDHandler = async (req, res, user, { Forum }) => {
         });
     } catch(e) {
         console.log(e)
+        res.setHeader("Content-Type", "text/plain");
         res.status(500).send("There was an issue getting forum details");
     }
 }
