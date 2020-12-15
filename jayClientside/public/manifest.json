@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ComTalk Seattle",
+  "name": "A community forum",
   "icons": [
     {
       "src": "favicon.ico",

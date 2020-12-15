@@ -52,7 +52,6 @@ const ViewForum = ({ user, setPage }) => {
             <div><h2>Hiking for the Win!</h2></div>
             <div>
                 <div id="posts">
-                    <p>There's some posts here, it's a general forum.</p>
                     <div id="rendered_messages">
                         <div id="post"> 
                             <div id="username">
