@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"os"
 	"time"
 
@@ -73,6 +74,11 @@ func main() {
 		}
 	*/
 
+	forumAddr := os.Getenv("FORUMADDR")
+	if len(forumAddr) == 0 {
+		log.Fatal("Error - could not find SUMMARYADDR enviroment variable")
+	}
+
 	//Section Two - Setting Up Database and other Store connections
 
 	//Create a new Redis Client
@@ -121,6 +127,13 @@ func main() {
 		messagingMicroservice := &httputil.ReverseProxy{Director: messagingDirector}
 	*/
 
+	forumDirector := func(r *http.Request) {
+		r.Host = forumAddr
+		r.URL.Host = forumAddr
+		r.URL.Scheme = "http"
+	}
+	forumMicroservice := &httputil.ReverseProxy{Director: forumDirector}
+
 	//Section Four - The Actual Routing
 
 	//Create a new mux for the web server.
@@ -130,6 +143,8 @@ func main() {
 	mux.Handle("/v1/channels", messagingMicroservice)
 	mux.Handle("/v1/channels/", messagingMicroservice)
 	mux.Handle("/v1/messages/", messagingMicroservice) */
+	mux.Handle("/v1/Seattle/forum", forumMicroservice)
+	mux.Handle("/v1/Seattle/forum/", forumMicroservice)
 	mux.HandleFunc("/v1/Seattle/users", hctx.UsersHandler)
 	mux.HandleFunc("/v1/Seattle/users/", hctx.SpecificUserHandler)
 	mux.HandleFunc("/v1/Seattle/sessions", hctx.SessionsHandler)
