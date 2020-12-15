@@ -30,9 +30,20 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             break;
     }
     return <>
+        <div>
+            <header>
+                <div><h1>ComTalk</h1> </div>
+
+                <div>Hello, {user.firstName} {user.lastName}</div>
+            </header>
+        </div>
         {content}
         {contentPage && <button onClick={(e) => setPage(e, PageTypes.signedInMain)}>Back to main</button>}
         <SignOutButton setUser={setUser} setAuthToken={setAuthToken} />
+
+        <footer>
+		<p>Copyright &copy; 2020</p>
+	    </footer>
     </>
 }
 
