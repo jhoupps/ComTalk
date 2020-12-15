@@ -19,7 +19,7 @@ class ViewForumClass extends React.Component {
         this.channels = {res: []}
     }
 
-    ViewForum = ({ user, setPage }) => {
+    componentDidMount = ({ user, setPage }) => {
         const [avatar, setForumList] = useState(null)
         async function fetchForumList() {
             const response = await fetch(api.base + api.handlers.specificForum + "/" + "5fd881adfe2d961658a7cec8", {
@@ -37,34 +37,50 @@ class ViewForumClass extends React.Component {
             console.log(forumjson[0]);
             //console.log(forumjson[0].name);
             getGithubOrgs(api.base + api.handlers.specificForum).then((res) =>
-                this.res = res
+                this.setState({res:res})
             );
         }
-        /*
-        useEffect(() => {
-            fetchForumList();
-            return;
-        }, []);
-        */
-        render() {
-            return(
+    }
+    
+    // res[0].posts[i]
+    }
+    render() {
+        return(
+            <div>
+                <div><h2>{this.res[0].name}</h2></div>
                 <div>
-                    <div><h2>{this.res[0].name}</h2></div>
-                    <div>
-                        <div id="posts">There's some posts here, it's a general forum.</div>
-                    </div>
-                    
-                    <div>
-                        <label for="new_message"></label>
-                        <textarea id="new_message"></textarea>
-                        <button aria-label="Send">Send</button>
+                    <div id="posts">
+                        <p>There's some posts here, it's a general forum.</p>
+                        <div id="rendered_messages"> 
+                            {this.state.res[0].posts.map((post) => {
+                                return (
+                                    <div id="post"> 
+                                        <div id="username">
+                                            <p>post.username</p>
+                                        </div>
+                                        <div id="timestamp">
+                                            <p>post.timestamp</p>
+                                        </div>
+                                        <div id="mesage">
+                                            <p>post</p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
-            )
-        }
+                
+                <div>
+                    <label for="new_message"></label>
+                    <textarea id="new_message"></textarea>
+                    <button aria-label="Send">Send</button>
+                </div>
+            </div>
+        )
     }
 }
 
 
 
-export default ViewForum;
+export default ViewForumClass;
