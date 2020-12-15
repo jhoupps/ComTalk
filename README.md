@@ -8,6 +8,13 @@ With the ComTalk platform, users will have the ability to create forums discussi
 
 TODO!!! UPDATE ARCHETECTURAL DIAGRAM 
 
+![ComTalk Architectural Diagram](architectural_diagram.png "Current as of 12.14.20") 
+
+Sharing link: https://drive.google.com/file/d/1ABDcMIL3H_FjReHX7tb6yyf56RIsr27w/view?usp=sharing
+
+In case of future changes, update the digram at above link. UW Gmail Account required
+
+
 # User Stories
 
 As a local community member .....
