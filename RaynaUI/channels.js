@@ -1,0 +1,1 @@
+// React code for rendering channel data.
