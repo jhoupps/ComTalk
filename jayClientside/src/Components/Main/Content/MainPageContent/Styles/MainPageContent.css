@@ -22,7 +22,7 @@ h1 {
     text-shadow: 2px 2px white;
 }
 
-button, #submit_button {
+button, #submit_button, #reset_button {
     transition-duration: 0.4s;
     border: 2px solid #044e24; /* Green */
     border-radius: 8px;

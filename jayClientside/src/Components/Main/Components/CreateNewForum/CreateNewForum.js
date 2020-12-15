@@ -92,7 +92,7 @@ class CreateNewForum extends Component {
                     <input name={"description"} value={description} onChange={this.setField} />
                 </div>
             </form>
-            <button id="submit_button" onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
+            <button id="forum_submit_button" onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button>
             <br />
         </>
     }
