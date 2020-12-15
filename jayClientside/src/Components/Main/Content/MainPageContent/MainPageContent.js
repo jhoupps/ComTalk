@@ -4,13 +4,14 @@ import './Styles/MainPageContent.css';
 import api from '../../../../Constants/APIEndpoints/APIEndpoints';
 
 const MainPageContent = ({ user, setPage }) => {
+    //Save State
     const [name, setForumName] = useState(null)
     const [name2, setForumName2] = useState(null)
     const [name3, setForumName3] = useState(null)  
     const [name4, setForumName4] = useState(null)  
     const [name5, setForumName5] = useState(null)
 
-    //JAY INTENDS TO BE WORKING ON THIS FILE
+    //Fetch data from API
     async function fetchForumList() {
         const response = await fetch(api.base + api.handlers.forum, {
             method: "GET",
@@ -23,14 +24,12 @@ const MainPageContent = ({ user, setPage }) => {
             //setForumList(user.photoURL)
             return;
         }
-        //WANYU - DO THINGS WITH the repsonse
-        console.log("I am in the mainpage content")
         const forumjson = await response.json();
-        console.log(forumjson);
-        console.log(forumjson[0]);
-        console.log(forumjson[0].name);
-        console.log("Confirming that Jay's code has changed to bad code");
 
+        //This code has bad style and is The Absolute Worst
+        //I have nicknamed it "the world's worst For loop"
+        //The style is such because I was unable to pass an array into the state, for some reason
+        //And I am too afraid of react to try to restructure this into a class with a render function
         var nameVal = ""; 
         try {
             nameVal = forumjson[0].name;
@@ -80,8 +79,7 @@ const MainPageContent = ({ user, setPage }) => {
     return <>
         <main>
 			<div>
-                <div><h2>Your 5 Most RecentSubscribed Channels</h2> </div>
-
+                <div><h2>Seattle's 5 Highlighted Forums</h2> </div>
 
 				<div id="subscribed_channels">
                     <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>{name}</button></div>
@@ -89,26 +87,12 @@ const MainPageContent = ({ user, setPage }) => {
                     <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>{name3}</button></div>
                     <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>{name4}</button></div>
                     <div><button onClick={(e) => { setPage(e, PageTypes.viewForum) }}>{name5}</button></div>
-
-
                 </div>
 
                 <div><button onClick={(e) => { setPage(e, PageTypes.createNewForum) }}>New Forum</button></div>
 			</div>
 	</main>
     </>
-
-//THE BUTTON UP THERE IS LINKED TO THE WRONG PAGE
-    /* previous return statement
-            return <>
-        <div>Welcome to my application, {user.firstName} {user.lastName}</div>
-
-        {avatar && <img className={"avatar"} src={avatar} alt={`${user.firstName}'s avatar`} />}
-        <div><button onClick={(e) => { setPage(e, PageTypes.signedInUpdateName) }}>Update name</button></div>
-        <div><button onClick={(e) => { setPage(e, PageTypes.signedInUpdateAvatar) }}>Update avatar</button></div>
-    </>
-    */
-
 }
 
 export default MainPageContent;
