@@ -74,6 +74,28 @@ class CreateNewForum extends Component {
         this.props.setUser(user);
     };
 
+    render() {
+        const { forumName, description, error } = this.state;
+        return <>
+            <Errors error={error} setError={this.setError} />
+
+            <div>Enter a new forum</div>
+            <form onSubmit={this.submitForum}>
+                <div>
+                    <span>Forum Name: </span>
+                    <input name={"forumName"} value={forumName} onChange={this.setField} />
+                </div>
+                <div>
+                    <span>Description: </span>
+                    <input name={"description"} value={description} onChange={this.setField} />
+                </div>
+                <input type="submit" value="Create new forum" />
+            </form>
+            <button onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Back</button>
+            <button onClick={(e) => this.props.setPage(e, PageTypes.signedInMain)}>Submit</button> 
+        </>
+    }
+
 }
 
 export default CreateNewForum;
