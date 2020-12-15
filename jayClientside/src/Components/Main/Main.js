@@ -5,7 +5,7 @@ import SignOutButton from './Components/SignOutButton/SignOutButton';
 import UpdateName from './Components/UpdateName/UpdateName';
 import UpdateAvatar from './Components/UpdateAvatar/UpdateAvatar';
 import ViewForum from './Components/ViewForum/ViewForum';
-import createNewForum from './Components/CreateNewForum/CreateNewForum';
+import CreateNewForum from './Components/CreateNewForum/CreateNewForum';
 import './Content/MainPageContent/Styles/MainPageContent.css';
 
 const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
@@ -28,7 +28,7 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             //    content = <>This is a general forum, I swear!</>;
                 break;
         case PageTypes.createNewForum:
-                 content = <createNewForum user={user} setPage={setPage}/>;
+                 content = <CreateNewForum user={user} setPage={setUser}/>;
                  break;
         default:
             content = <>Error, invalid path reached</>;
