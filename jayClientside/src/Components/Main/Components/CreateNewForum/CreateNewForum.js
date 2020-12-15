@@ -98,17 +98,16 @@ class CreateNewForum extends Component {
             </div>
             <br />
             <form onSubmit={this.submitForum}>
-                <div>
+                <div id="form_entry">
                     <span>Forum Name: </span>
                     <input name={"name"} value={name} onChange={this.setField} />
                 </div>
-                <div>
+                <div id="form_entry">
                     <span>Description: </span>
                     <input name={"description"} value={description} onChange={this.setField} />
                 </div>
                 <input type="submit" value="Submit" />
             </form>
-
             <br />
         </>
     }

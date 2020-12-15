@@ -72,19 +72,19 @@ class ForgotPassword extends Component {
             {resetCodeSent ?
                 <>
                     <form onSubmit={(e) => this.updatePassword(e)}>
-                        <div>
+                        <div id="form_entry">
                             <span>Password: </span>
                             <input name={"password"} type={"password"} onChange={this.setValue} value={password} />
                         </div>
-                        <div>
+                        <div id="form_entry">
                             <span>Password Confirmation: </span>
                             <input name={"passwordConf"} type={"password"} onChange={this.setValue} value={passwordConf} />
                         </div>
-                        <div>
+                        <div id="form_entry">
                             <span>Reset Code: </span>
                             <input name={"resetCode"} onChange={this.setValue} value={resetCode} />
                         </div>
-                        <input type="submit" value="Update my password" />
+                        <input id="submit_button" type="submit" value="Update my password" />
                     </form>
                 </>
                 :
@@ -94,7 +94,7 @@ class ForgotPassword extends Component {
                             <span>Email: </span>
                             <input name={"email"} onChange={this.setValue} value={email} />
                         </div>
-                        <input type="submit" value="Send me a reset code" />
+                        <input id="reset_button" type="submit" value="Send Reset Code" />
                     </form>
                 </>}
             <button onClick={(e) => this.props.setPage(e, PageTypes.signIn)}>Back to sign in</button>

@@ -4,7 +4,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: lightgreen;
+    background-image: url("./pics/forest3.jpg");
 }
 
 #subscribed_channels {
@@ -15,5 +15,77 @@ body {
 h1, h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #044e24;
+    text-align: center;
 }
 
+h1 {
+    text-shadow: 2px 2px white;
+}
+
+button, #submit_button {
+    transition-duration: 0.4s;
+    border: 2px solid #044e24; /* Green */
+    border-radius: 8px;
+    padding: 10px 24px;
+}
+
+button:hover, #submit_button:hover {
+    background-color: #044e24; /* Green */
+    color: white;
+}
+
+footer {
+    bottom: 0;
+    text-align: center;
+    color: white;
+    position: fixed;
+    width: 100%;
+}
+
+#form_entry {
+    text-align: center;
+    padding: 20px;
+}
+
+#form_entry > span {
+    color: #044e24;
+    font-family: cursive;
+}
+
+#submit_button {
+    margin: 0, auto;
+    margin-top: 30px;
+}
+
+#sign_out, #sign_up {
+    position: absolute;
+    top: 80%;
+    left: 60%;
+}
+
+#back_home, #forgot_password {
+    position: absolute;
+    top: 80%;
+    right: 60%;
+}
+
+#landing_title {
+    color: white;
+    text-shadow: 2px 2px #044e24;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #044e24;
+    text-align: center;
+}

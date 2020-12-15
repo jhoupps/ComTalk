@@ -81,13 +81,20 @@ class SignIn extends Component {
         const { error } = this.state;
         return <>
             <Errors error={error} setError={this.setError} />
-            <SignForm
-                setField={this.setField}
-                submitForm={this.submitForm}
-                values={values}
-                fields={this.fields} />
-            <button onClick={(e) => this.props.setPage(e, PageTypes.signUp)}>Sign up instead</button>
-            <button onClick={(e) => this.props.setPage(e, PageTypes.forgotPassword)}>Forgot password</button>
+            <h1>ComTalk</h1>
+            <div id="form_entry">
+                <SignForm
+                    setField={this.setField}
+                    submitForm={this.submitForm}
+                    values={values}
+                    fields={this.fields} 
+                />
+             </div>
+            <button id="sign_up" onClick={(e) => this.props.setPage(e, PageTypes.signUp)}>Sign Up</button>
+            <button id="forgot_password" onClick={(e) => this.props.setPage(e, PageTypes.forgotPassword)}>Forgot Password</button>
+            <footer>
+                <p>Andy | Jay | Rayna | Wanyu | Copyright &copy; 2020</p>
+	        </footer>
         </>
     }
 }

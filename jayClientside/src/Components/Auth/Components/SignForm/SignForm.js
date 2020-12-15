@@ -6,7 +6,7 @@ const SignForm = ({ setField, submitForm, values, fields }) => {
         <form onSubmit={submitForm}>
             {fields.map(d => {
                 const { key, name } = d;
-                return <div key={key}>
+                return <div key={key} id="form_entry">
                     <span>{name}: </span>
                     <input
                         value={values[key]}
@@ -16,7 +16,7 @@ const SignForm = ({ setField, submitForm, values, fields }) => {
                     />
                 </div>
             })}
-            <input type="submit" value="Submit" />
+            <input id="submit_button" type="submit" value="Submit" />
         </form>
     </>
 }

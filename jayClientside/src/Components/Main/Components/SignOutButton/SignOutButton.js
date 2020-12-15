@@ -6,7 +6,7 @@ import Errors from '../../../Errors/Errors';
 const SignOutButton = ({ setAuthToken, setUser }) => {
     const [error, setError] = useState("");
 
-    return <><button onClick={async (e) => {
+    return <><button id="sign_out" onClick={async (e) => {
         e.preventDefault();
         const response = await fetch(api.base + api.handlers.sessionsMine, {
             method: "DELETE"
@@ -20,7 +20,7 @@ const SignOutButton = ({ setAuthToken, setUser }) => {
         setError("");
         setAuthToken("");
         setUser(null);
-    }}>Sign out</button>
+    }}>Sign Out</button>
         {error &&
             <div>
                 <Errors error={error} setError={setError} />
