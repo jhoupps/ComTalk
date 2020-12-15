@@ -17,3 +17,12 @@ h1, h2 {
     color: #044e24;
 }
 
+button, #submit_button {
+    transition-duration: 0.4s;
+    border: 2px solid #044e24; /* Green */
+}
+
+button:hover {
+    background-color: #044e24; /* Green */
+    color: white;
+}
