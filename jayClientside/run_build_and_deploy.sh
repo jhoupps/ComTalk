@@ -1,5 +1,5 @@
 #!/bin/bash
-npm run build
+#npm run build
 
 docker build -t comtalk/jayclientside .
 docker push comtalk/jayclientside

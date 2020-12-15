@@ -4,7 +4,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: url("./pics/leaves_background.jpg");
+    background-image: url("./pics/leaves_background.jpg");
     opacity: 0.5;
 }
 
