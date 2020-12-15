@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import api from '../../../../Constants/APIEndpoints/APIEndpoints';
 import Errors from '../../../Errors/Errors';
+import PageTypes from '../../../../Constants/PageTypes/PageTypes';
 
 /**
  * @class
- * @classdesc CreateNewForumName handles the creation of new forum name component
+ * @classdesc CreateNewForum handles the creation of new forum name component
  */
 
 class CreateNewForum extends Component {
