@@ -1,3 +1,14 @@
 .avatar {
     max-width: 300px;
 }
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: url("./pics/leaves_background.jpg");
+    opacity: 0.5;
+}
+
+#subscribed_channels {
+    max-width: 960px;
+    margin: auto;
+}

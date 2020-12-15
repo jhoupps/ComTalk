@@ -1,3 +1,10 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: url("./pics/leaves_background.jpg");
+    opacity: 0.5;
+}
+
+h1, h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #044e24;
 }
