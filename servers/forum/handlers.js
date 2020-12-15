@@ -3,10 +3,8 @@ const getForumHandler = async (req, res, user, { Forum }) => {
         const forums = await Forum.find();
         res.json(forums);
         res.setHeader("Content-Type", "application/json");
-        res.end();
     } catch (e) {
         res.status(500).send("There was an issue getting the forums");
-        res.end();
     }
 };
 
@@ -14,7 +12,6 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     const { name, description, creator } = req.body
     if (!name) {
         res.status(400).send("Must provide a name for the forum");
-        res.end();
         return;
     }
 
@@ -37,7 +34,6 @@ const postForumHandler = async (req, res, user, { Forum }) => {
 
         res.setHeader("Content-Type", "application/json");
         res.status(201).json(newForum);
-        res.end();
     })
 };
 
@@ -50,7 +46,6 @@ const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
-            res.end();
         } else {
             const messages = await Message
                 .find({forumID: req.params.forumID})
@@ -58,11 +53,9 @@ const getForumIDHandler = async (req, res, user, { Forum, Message }) => {
                 .limit(100);
             res.setHeader("Content-Type", "application/json");
             res.json(messages)
-            res.end();
         }
     } catch (e) {
         res.status(500).send("There was an issue getting the specified forum")
-        res.end();
     }
 }
 
@@ -81,13 +74,13 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
     const query = new Message(message)
     query.save((err, newMessage) => {
         if (err) {
+            console.log(err)
             res.status(500).send('Unable to create message');
             return;
         }
 
         res.status(201).json(newMessage)
         res.setHeader("Content-Type", "application/json")
-        res.end();
     })
 }
 

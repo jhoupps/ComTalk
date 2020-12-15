@@ -12,7 +12,7 @@ const {
    deleteForumIDHandler
 } = require('./handlers')
 
-const mongoEndpoint = "mongodb://localhost:27017/test"
+const mongoEndpoint = "mongodb://mongoContainer:27017/test"
 
 const Forum = mongoose.model("Forum", forumSchema);
 const Message = mongoose.model("Message", messageSchema);
@@ -20,11 +20,14 @@ const Message = mongoose.model("Message", messageSchema);
 // const addr = process.env.ADDR || ":80"
 // const [host, port] = addr.split(":")
 
-const port = 4000
-
 const app = express();
+
+const addr = process.env.addr || ":80"
+const [host, port] = addr.split(":")
+
 app.use(express.json());
 app.use(morgan("dev"));
+
 
 const connect = () => {
     mongoose.connect(mongoEndpoint);
@@ -59,6 +62,6 @@ mongoose.connection.on('error', console.error)
 
 async function main() {
     app.listen(port, "", () => {
-        console.log(`server is listening at ${port}`);
+        console.log(`server is listening at http://${port}`);
     });
 }
