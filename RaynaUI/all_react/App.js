@@ -60,6 +60,8 @@ class App extends React.Component {
                 <React.Fragment>
                     <Forum />
                 </React.Fragment>
+
+                
             );
         }
     }

@@ -2,6 +2,8 @@
 comtalk_aws_instance.pem
 */node_modules/
 
+#npm things 
+*/node_modules
 # Binaries for programs and plugins
 *.exe
 *.exe~

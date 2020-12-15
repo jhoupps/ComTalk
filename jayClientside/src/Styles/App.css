@@ -1,0 +1,19 @@
+.avatar {
+    max-width: 300px;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: lightgreen;
+}
+
+#subscribed_channels {
+    max-width: 960px;
+    margin: auto;
+}
+
+h1, h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #044e24;
+}
+
