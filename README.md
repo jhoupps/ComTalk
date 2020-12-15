@@ -74,7 +74,4 @@ I want to be able to make posts on a forum and speak with my fellow community me
 |       |       |  400: Bad Request                 | Error in Request  |
 |       |       | 500: Internal Server Error        | Internal Error |
 |       |       |                                    |  |
-|  /v1/Seattle/forum/ | DELETE   | 201: Created   | Delete this forum and all messages in it|
-|       |       |  400: Bad Request                 | Error in Request  |
-|       |       | 500: Internal Server Error        | Internal Error |
-|       |       |                                    |  |
+
