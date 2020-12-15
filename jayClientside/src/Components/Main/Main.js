@@ -4,6 +4,7 @@ import MainPageContent from './Content/MainPageContent/MainPageContent';
 import SignOutButton from './Components/SignOutButton/SignOutButton';
 import UpdateName from './Components/UpdateName/UpdateName';
 import UpdateAvatar from './Components/UpdateAvatar/UpdateAvatar';
+import ViewForum from './Components/ViewForum/ViewForum';
 
 const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
     let content = <></>
@@ -21,8 +22,8 @@ const Main = ({ page, setPage, setAuthToken, setUser, user }) => {
             content = <>If you're seeing this, Jay successfully removed the updateAvatar page</>;
             break;
         case PageTypes.viewForum:
-            // content = <UpdateAvatar user={user} setUser={setUser} />;
-                content = <>This is a general forum, I swear!</>;
+             content = <ViewForum user={user} setUser={setUser} />;
+            //    content = <>This is a general forum, I swear!</>;
                 break;
         default:
             content = <>Error, invalid path reached</>;

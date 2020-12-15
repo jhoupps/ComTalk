@@ -16,9 +16,10 @@ const MainPageContent = ({ user, setPage }) => {
         });
         if (response.status >= 300) {
             // const error = await response.text();
-            setForumList(user.photoURL)
+            //setForumList(user.photoURL)
             return;
         }
+        //WANYU - DO THINGS WITH the repsonse
         const forumjson = await response.json();
         console.log(forumjson);
     }
