@@ -2,9 +2,14 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 	"os"
+	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/ComTalk/servers/gateway/handlers"
@@ -12,6 +17,34 @@ import (
 	"github.com/ComTalk/servers/gateway/sessions"
 	"github.com/go-redis/redis"
 )
+
+// Director type object for reverse proxy
+type Director func(r *http.Request)
+
+// ProxyDirector is the director function for the reverse proxy
+func ProxyDirector(targets []*url.URL, context *handlers.HandlerContext) Director {
+	var counter int32 = 0
+
+	return func(r *http.Request) {
+		targ := targets[int(counter)%len(targets)]
+		atomic.AddInt32(&counter, 1)
+
+		r.Header.Add("X-Forwarded-Host", r.Host)
+		r.Host = targ.Host
+		r.URL.Host = targ.Host
+		r.URL.Scheme = targ.Scheme
+
+		sessionState := &handlers.SessionState{}
+		_, err := sessions.GetState(r, context.SigningKey, context.SessionsStore, sessionState)
+		if err != nil {
+			r.Header.Del("X-User")
+		} else {
+			user := &users.User{ID: sessionState.AuthenticatedUser.ID}
+			json, _ := json.Marshal(user)
+			r.Header.Set("X-User", string(json))
+		}
+	}
+}
 
 //The main entrypoint for our server
 
@@ -73,6 +106,11 @@ func main() {
 		}
 	*/
 
+	forumAddr := os.Getenv("FORUMADDR")
+	if len(forumAddr) == 0 {
+		log.Fatal("Error - could not find SUMMARYADDR enviroment variable")
+	}
+
 	//Section Two - Setting Up Database and other Store connections
 
 	//Create a new Redis Client
@@ -121,6 +159,25 @@ func main() {
 		messagingMicroservice := &httputil.ReverseProxy{Director: messagingDirector}
 	*/
 
+	/*forumDirector := func(r *http.Request) {
+		r.Host = forumAddr
+		r.URL.Host = forumAddr
+		r.URL.Scheme = "http"
+	}
+	forumMicroservice := &httputil.ReverseProxy{Director: forumDirector}*/
+
+	var forumAddresses []*url.URL
+	forumArray := strings.Split(forumAddr, ",")
+	for _, addr := range forumArray {
+		urlParseAddress, err := url.Parse(addr)
+		if err != nil {
+			log.Fatalf("error parsing address: %s", err)
+		}
+		forumAddresses = append(forumAddresses, urlParseAddress)
+	}
+
+	forumMicroservice := &httputil.ReverseProxy{Director: ProxyDirector(forumAddresses, hctx)}
+
 	//Section Four - The Actual Routing
 
 	//Create a new mux for the web server.
@@ -130,6 +187,8 @@ func main() {
 	mux.Handle("/v1/channels", messagingMicroservice)
 	mux.Handle("/v1/channels/", messagingMicroservice)
 	mux.Handle("/v1/messages/", messagingMicroservice) */
+	mux.Handle("/v1/Seattle/forum", forumMicroservice)
+	mux.Handle("/v1/Seattle/forum/", forumMicroservice)
 	mux.HandleFunc("/v1/Seattle/users", hctx.UsersHandler)
 	mux.HandleFunc("/v1/Seattle/users/", hctx.SpecificUserHandler)
 	mux.HandleFunc("/v1/Seattle/sessions", hctx.SessionsHandler)

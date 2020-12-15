@@ -2,9 +2,9 @@ const getForumHandler = async (req, res, user, { Forum }) => {
     try {
         const forums = await Forum.find();
         res.json(forums);
-        res.setHeader("Content-Type", "application/json")
+        res.setHeader("Content-Type", "application/json");
     } catch (e) {
-        res.status(500).send("There was an issue getting the forums")
+        res.status(500).send("There was an issue getting the forums");
     }
 };
 
@@ -27,12 +27,13 @@ const postForumHandler = async (req, res, user, { Forum }) => {
     const query = new Forum(forum);
     query.save((err, newForum) => {
         if (err) {
+            console.log(err)
             res.status(500).send('Unable to create forum');
             return;
         }
 
+        res.setHeader("Content-Type", "application/json");
         res.status(201).json(newForum);
-        res.setHeader("Content-Type", "application/json")
     })
 };
 
@@ -73,6 +74,7 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
     const query = new Message(message)
     query.save((err, newMessage) => {
         if (err) {
+            console.log(err)
             res.status(500).send('Unable to create message');
             return;
         }
@@ -83,12 +85,22 @@ const postForumIDHandler = async (req, res, user, { Forum, Message }) => {
 }
 
 const deleteForumIDHandler = async (req, res, user, { Forum }) => {
-    const forum = await Forum.find();
-    if (forum.creator != user) {
-        res.status(403).send("User is forbidden")
-        return
-    }
+    try {
+        const forumID = req.params.forumID
 
-    forum.delete()
-    res.send("Forum successfully deleted")
+        Forum.findByIdAndDelete(forumID, function(err, updatedForum) {
+            if (err) {
+                res.status(500).send("There was an issue deleting the forum");
+                console.log(err);
+                return;
+            }
+            res.set("Content-Type", "text/plain")
+            res.send("Forum successfully deleted");
+        });
+    } catch(e) {
+        console.log(e)
+        res.status(500).send("There was an issue getting forum details");
+    }
 }
+
+module.exports = {getForumHandler, postForumHandler, getForumIDHandler, postForumIDHandler, deleteForumIDHandler}

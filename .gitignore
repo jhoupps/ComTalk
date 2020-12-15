@@ -1,5 +1,6 @@
 #keys
 comtalk_aws_instance.pem
+*/node_modules/
 
 #npm things 
 */node_modules

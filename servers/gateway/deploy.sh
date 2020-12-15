@@ -5,4 +5,4 @@
 
 ./build.sh 
 docker push comtalk/gateway
-ssh -i "../../../comtalk_keys.pem" ec2-user@ec2-34-211-151-171.us-west-2.compute.amazonaws.com < inside_aws_script.sh
+ssh -t -t -i "../../../comtalk_keys.pem" ec2-user@ec2-34-211-151-171.us-west-2.compute.amazonaws.com < inside_aws_script.sh

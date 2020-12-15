@@ -109,7 +109,7 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 	var intUserID int64
 
 	if userID == "me" {
-		intUserID = sessionState.authenticatedUser.ID
+		intUserID = sessionState.AuthenticatedUser.ID
 	} else {
 		tempIntUserID, err := strconv.ParseInt(userID, 10, 64)
 		if err != nil {
@@ -143,10 +143,10 @@ func (hc *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Req
 	} else if r.Method == "PATCH" {
 		//check self status
 		log.Printf("The user id from the url is %d", intUserID)
-		log.Printf("The authenticated user is %d", sessionState.authenticatedUser.ID)
-		log.Printf("The authenticated user name is" + sessionState.authenticatedUser.UserName)
+		log.Printf("The authenticated user is %d", sessionState.AuthenticatedUser.ID)
+		log.Printf("The authenticated user name is" + sessionState.AuthenticatedUser.UserName)
 
-		if sessionState.authenticatedUser.ID != intUserID {
+		if sessionState.AuthenticatedUser.ID != intUserID {
 			http.Error(w, "Error: You may only modify your own user profile", 403)
 			return
 		}
