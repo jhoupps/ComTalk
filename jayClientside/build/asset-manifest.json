@@ -1,53 +1,13 @@
 {
-<<<<<<< HEAD
-  "main.css": "/static/css/main.46792009.chunk.css",
-  "main.js": "/static/js/main.670f3633.chunk.js",
-  "main.js.map": "/static/js/main.670f3633.chunk.js.map",
+  "main.css": "/static/css/main.12d9be25.chunk.css",
+  "main.js": "/static/js/main.333d3a69.chunk.js",
+  "main.js.map": "/static/js/main.333d3a69.chunk.js.map",
   "static/js/1.3a6aafd9.chunk.js": "/static/js/1.3a6aafd9.chunk.js",
   "static/js/1.3a6aafd9.chunk.js.map": "/static/js/1.3a6aafd9.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/MainPageContent.css": "/static/media/more_evergreen.e3db386a.jpg",
-  "static/css/main.46792009.chunk.css.map": "/static/css/main.46792009.chunk.css.map",
+  "static/css/main.12d9be25.chunk.css.map": "/static/css/main.12d9be25.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.cfbefa4fbfe81aa27013950f6e8f03c5.js": "/precache-manifest.cfbefa4fbfe81aa27013950f6e8f03c5.js",
+  "precache-manifest.4ebad91051c6a84b6db4a2a5e1ff5af9.js": "/precache-manifest.4ebad91051c6a84b6db4a2a5e1ff5af9.js",
   "service-worker.js": "/service-worker.js"
-=======
-  "files": {
-<<<<<<< HEAD
-    "main.css": "/static/css/main.ad43648a.chunk.css",
-    "main.js": "/static/js/main.b3abb9d9.chunk.js",
-    "main.js.map": "/static/js/main.b3abb9d9.chunk.js.map",
-=======
-    "main.css": "/static/css/main.d5ea0199.chunk.css",
-    "main.js": "/static/js/main.663a7e65.chunk.js",
-    "main.js.map": "/static/js/main.663a7e65.chunk.js.map",
->>>>>>> 8773c4d782b621dcc549ad677950c7db30c5043e
-    "runtime-main.js": "/static/js/runtime-main.c012fedc.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c012fedc.js.map",
-    "static/js/2.a7d25cf3.chunk.js": "/static/js/2.a7d25cf3.chunk.js",
-    "static/js/2.a7d25cf3.chunk.js.map": "/static/js/2.a7d25cf3.chunk.js.map",
-    "index.html": "/index.html",
-<<<<<<< HEAD
-    "static/css/main.ad43648a.chunk.css.map": "/static/css/main.ad43648a.chunk.css.map",
-    "static/js/2.a7d25cf3.chunk.js.LICENSE.txt": "/static/js/2.a7d25cf3.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/static/media/forest3.43931c8a.jpg"
-=======
-    "static/css/main.d5ea0199.chunk.css.map": "/static/css/main.d5ea0199.chunk.css.map",
-    "static/js/2.a7d25cf3.chunk.js.LICENSE.txt": "/static/js/2.a7d25cf3.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/static/media/more_evergreen.a12e65b7.jpg"
->>>>>>> 8773c4d782b621dcc549ad677950c7db30c5043e
-  },
-  "entrypoints": [
-    "static/js/runtime-main.c012fedc.js",
-    "static/js/2.a7d25cf3.chunk.js",
-<<<<<<< HEAD
-    "static/css/main.ad43648a.chunk.css",
-    "static/js/main.b3abb9d9.chunk.js"
-=======
-    "static/css/main.d5ea0199.chunk.css",
-    "static/js/main.663a7e65.chunk.js"
->>>>>>> 8773c4d782b621dcc549ad677950c7db30c5043e
-  ]
->>>>>>> 642ab39089dfef10331acd20c28f95969e953071
 }
